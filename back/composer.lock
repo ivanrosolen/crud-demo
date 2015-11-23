@@ -1,0 +1,231 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "72f3f88c1b6ac21345dafc9f430dad9b",
+    "content-hash": "55bfc86b36e49a2c1572474a7152a38a",
+    "packages": [
+        {
+            "name": "respect/data",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Data.git",
+                "reference": "f536f5e08affb617e08f73c3993ed52e70c3e120"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Data/zipball/f536f5e08affb617e08f73c3993ed52e70c3e120",
+                "reference": "f536f5e08affb617e08f73c3993ed52e70c3e120",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Respect\\Data": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Rogerio Prado de Jesus",
+                    "email": "rogeriopradoj@gmail.com"
+                },
+                {
+                    "name": "Augusto Pascutti",
+                    "email": "augusto@phpsp.org.br"
+                },
+                {
+                    "name": "Henrique Moody",
+                    "email": "henriquemoody@gmail.com"
+                },
+                {
+                    "name": "Nick Lombard",
+                    "email": "github@jigsoft.co.za"
+                },
+                {
+                    "name": "Alexandre",
+                    "email": "alexandre@gaigalas.net"
+                }
+            ],
+            "description": "Persistence simplified",
+            "homepage": "http://respect.li/",
+            "time": "2015-01-05 16:03:48"
+        },
+        {
+            "name": "respect/relational",
+            "version": "0.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Relational.git",
+                "reference": "ba4fb6ddcbd12968fa41b7c8f436fc6dd9c7b774"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Relational/zipball/ba4fb6ddcbd12968fa41b7c8f436fc6dd9c7b774",
+                "reference": "ba4fb6ddcbd12968fa41b7c8f436fc6dd9c7b774",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "respect/data": "~0.2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\": "library/Respect"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Gomes Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Respect/Data Contributors",
+                    "homepage": "https://github.com/Respect/Data/graphs/contributors"
+                }
+            ],
+            "description": "Fluent Database Toolkit",
+            "homepage": "http://respect.li",
+            "time": "2015-09-25 07:09:43"
+        },
+        {
+            "name": "respect/rest",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Rest.git",
+                "reference": "4f60aa199623d738a3391ca1e80bafb754bc9308"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Rest/zipball/4f60aa199623d738a3391ca1e80bafb754bc9308",
+                "reference": "4f60aa199623d738a3391ca1e80bafb754bc9308",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Respect\\": "library/Respect"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Respect/Data Contributors",
+                    "homepage": "https://github.com/Respect/Data/graphs/contributors"
+                }
+            ],
+            "description": "Thin controller for RESTful applications",
+            "homepage": "http://respect.li/",
+            "time": "2015-01-12 09:55:16"
+        },
+        {
+            "name": "respect/validation",
+            "version": "0.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Validation.git",
+                "reference": "403b80e92c9ea3a411bba20fb674c8c67a85647b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/403b80e92c9ea3a411bba20fb674c8c67a85647b",
+                "reference": "403b80e92c9ea3a411bba20fb674c8c67a85647b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "egulias/email-validator": "~1.2",
+                "malkusch/bav": "~1.0",
+                "phpunit/phpunit": "~4.0",
+                "symfony/validator": "~2.6.9",
+                "zendframework/zend-validator": "~2.3"
+            },
+            "suggest": {
+                "egulias/email-validator": "Strict (RFC compliant) email validation",
+                "ext-bcmath": "Arbitrary Precision Mathematics",
+                "ext-mbstring": "Multibyte String Functions",
+                "malkusch/bav": "German bank account validation",
+                "symfony/validator": "Use Symfony validator through Respect\\Validation",
+                "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\Validation\\": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Respect/Validation Contributors",
+                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                }
+            ],
+            "description": "The most awesome validation engine ever created for PHP",
+            "homepage": "http://respect.li",
+            "keywords": [
+                "respect",
+                "validation",
+                "validator"
+            ],
+            "time": "2015-06-06 13:06:25"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!--
+           _    _
+          / \__/ \_____
+         /  /  \  \    `\
+         )  \''/  (     |\
+         `\__)/__/'_\  / `
+    php     //_|_|~|_|_|
+            ^""'"' ""'"'
+-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Ivan Rosolen">
+
+    <title>CRUD Demo</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="app">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" id="user" class="user"><span class="glyphicon glyphicon-user"></span> User</a></li>
+            <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="main" class="container-fluid">
+
+        <h3 class="page-header">Alterar Registro</h3>
+
+        <form class="form-horizontal" id="update">
+            <div class="form-group">
+                <label for="field_text" class="col-sm-2 control-label">Campo Texto</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="field_text" name="field_text" placeholder="Xuplau!">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="field_date" class="col-sm-2 control-label">Campo Data</label>
+                <div class="col-sm-10">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" name="field_date" id="field_date" placeholder="dd/mm/yyyy" value="">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-th"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group givemeright">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="list.html" class="btn btn-default">Cancelar</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-primary" id="btnSend">Salvar</button>
+                </div>
+            </div>
+            <input type="hidden" value="" id="hashId" name="hashId">
+        </form>
+
+    </div>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/bootstrap-datepicker.pt-BR.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            function getVar(name){
+               if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+                  return decodeURIComponent(name[1]);
+            }
+
+            var infoHash = getVar('hash');
+
+            var app      = APP().init();
+
+            if ( app.user_hash == undefined || app.user_hash == '' ) {
+                window.location = 'index.html';
+            } else {
+                $('#user').html(app.user_name);
+                app.retreive(infoHash,responseCallback);
+                $('#field_date').datepicker({
+                    format: "dd/mm/yyyy",
+                    todayBtn: "linked",
+                    language: "pt-BR",
+                    autoclose: true,
+                    todayHighlight: true
+                });
+                $('#hashId').val(infoHash);
+            }
+
+            $('#update').submit(function(e){
+
+                var data        = {};
+                data.hashId     = $('#hashId').val(),
+                data.field_text = $('#field_text').val(),
+                data.field_date = $('#field_date').val();
+                e.preventDefault();
+
+                $('#btnSend')
+                .text('Enviando ...');
+
+                app.update(data,responseCallbackUpdate);
+            });
+
+            function responseCallbackUpdate ( data ) {
+                if ( data.newHash != undefined && data.newHash != '' ) {
+                    window.location = 'retrieve.html?hash='+data.newHash;
+                } else {
+                    alert('Erro ao atualziar registro');
+                }
+            }
+
+            function responseCallback ( data ) {
+
+                if ( data != undefined && data.hash != undefined ) {
+                    $('#hashId').val(data.hash);
+                    $('#field_text').val(data.field_text);
+                    $('#field_date').val(data.field_date);
+
+                } else {
+                    window.location = 'list.html';
+                }
+
+            };
+
+            $('#logout')
+            .css('cursor','pointer')
+            .click(function(e){
+                e.preventDefault();
+                app.logout();
+            });
+
+        });
+
+    </script>
+
+  </body>
+</html>

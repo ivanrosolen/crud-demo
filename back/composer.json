@@ -1,0 +1,20 @@
+{
+    "name": "CRUD Demo",
+    "authors": [
+        {
+          "name": "Ivan Rosolen",
+          "email": "ivanrosolen@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "Xuplau\\":"application/library/Xuplau/"
+        }
+    },
+    "require": {
+      "respect/rest": "0.6.x",
+      "respect/data": "0.2.2",
+      "respect/relational": "0.8.x",
+      "respect/validation": "0.9.x"
+    }
+}
