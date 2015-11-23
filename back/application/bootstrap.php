@@ -8,9 +8,6 @@ define('SETTINGS_INI',  realpath(__DIR__ ). '/config/settings.ini');
 
 define('APP_SESSION',  'CRUD_DEMO_APP');
 
-define('TYPE_ADM',     'ADM');
-define('TYPE_USER',    'USER');
-
 if (!$config = parse_ini_file(SETTINGS_INI, true)) {
     throw new Exception('Unable to open settings file');
 }

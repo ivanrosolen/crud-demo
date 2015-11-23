@@ -1,4 +1,4 @@
-# CRUD DEMO
+# CRUD DEMO Sessions
 
 # links
 - palestra
