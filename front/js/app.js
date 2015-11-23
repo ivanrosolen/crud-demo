@@ -8,7 +8,7 @@ APP.prototype = {
 
     init: function () {
 
-        this.endpoint = 'http://crud.dev/back/';
+        this.endpoint = 'http://api.crud.dev/';
 
         if ( window.localStorage.getItem('user_hash') != undefined &&
              window.localStorage.getItem('user_hash') != '' &&
