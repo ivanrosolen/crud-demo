@@ -6,6 +6,7 @@ use Xuplau\CRUD\Response as Response;
 use Xuplau\CRUD\User\Check as UserCheck;
 use Lcobucci\JWT\ValidationData;
 use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 $base = '';
 
@@ -58,7 +59,11 @@ $loginCheck = function() use ($router) {
         $data->setAudience($config['jwt']['audience']);
         $data->setId($config['jwt']['id'], true);
 
-        if ( (bool) $token->validate($data) !== true ) {
+        $signer = new Sha256;
+
+        if ( (bool) $token->validate($data) !== true ||
+             (bool) $token->verify($signer, $config['jwt']['key']) !== true )
+        {
             echo Response::Unauthorized();
             return false;
         }

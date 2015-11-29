@@ -6,6 +6,7 @@ use Xuplau\CRUD\Response as Response;
 use Xuplau\Database\MapperDB;
 use Respect\Rest\Routable;
 use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 use PDOException;
 use Exception;
 use stdClass;
@@ -47,6 +48,8 @@ Class Login extends MapperDB implements Routable
             return Response::Internal_Server_Error('Falha no login');
         }
 
+        $signer = new Sha256;
+
         $builder = new Builder;
         $token   = $builder->setIssuer($config['jwt']['issuer'])
                            ->setAudience($config['jwt']['audience'])
@@ -55,6 +58,7 @@ Class Login extends MapperDB implements Routable
                            ->setNotBefore(time() - 1)
                            ->setExpiration(time() + 3600)
                            ->set('uid', $login->hash)
+                           ->sign($signer, $config['jwt']['key'])
                            ->getToken();
 
         $tmp          = new stdClass;
