@@ -15,7 +15,7 @@ $router->get('/user/logout',  'Xuplau\CRUD\User\Logout');
 
 $router->get('/list/infos/*/*/*', 'Xuplau\CRUD\Info\ListAll');
 
-$router->get('/info/*/*',  'Xuplau\CRUD\Info\Crud');
+$router->get('/info/*',  'Xuplau\CRUD\Info\Crud');
 $router->post('/info/*/',   'Xuplau\CRUD\Info\Crud');
 $router->put('/info/*/',    'Xuplau\CRUD\Info\Crud');
 $router->delete('/info/*/', 'Xuplau\CRUD\Info\Crud');
@@ -30,13 +30,21 @@ $jsonRender = function ($data) {
     return json_encode($data, true);
 };
 
-$loginCheck = function( $token = null ) use ($router) {
+$loginCheck = function() use ($router) {
 
     if (!$config = parse_ini_file(SETTINGS_INI, true)) {
         return Response::Internal_Server_Error('Falha no login');
     }
 
-    $token = base64_decode($token);
+    // get token
+    /*$token = base64_decode($token);
+
+    $userCheck = new UserCheck;
+    $login     = $userCheck->isValid( $token );
+
+    if ( $login === false ) {
+        return Response::Unauthorized();
+    }*/
 
     if ( empty($token) && !in_array($router->request->uri, array( '/user/login', '/user/logout' )) ) {
 

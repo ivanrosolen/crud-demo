@@ -13,16 +13,7 @@ use stdClass;
 Class ListAll extends MapperDB implements Routable
 {
 
-    public function get( $token, $pagina = 0, $search = 'all' ) {
-
-        $token = base64_decode($token);
-
-        $userCheck = new UserCheck;
-        $login     = $userCheck->isValid( $token );
-
-        if ( $login === false ) {
-            return Response::Unauthorized();
-        }
+    public function get( $pagina = 0, $search = 'all' ) {
 
         $pagination = 2;
 

@@ -10,6 +10,7 @@ if (!$config = parse_ini_file(SETTINGS_INI, true)) {
 
 header('Access-Control-Allow-Origin: ' . $config['config']['host']);
 header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE');
+header('Access-Control-Allow-Headers: Authorization');
 header('Content-Type: application/json; charset=utf-8');
 
 if( $_SERVER['REQUEST_METHOD'] == 'OPTIONS' ) {
