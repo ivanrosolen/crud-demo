@@ -3,6 +3,7 @@
 use Respect\Rest\Router;
 use Xuplau\CRUD\Validation as v;
 use Xuplau\CRUD\Response as Response;
+use Xuplau\CRUD\User\Check as UserCheck;
 use Lcobucci\JWT\ValidationData;
 use Lcobucci\JWT\Parser;
 
@@ -16,9 +17,9 @@ $router->get('/user/logout',  'Xuplau\CRUD\User\Logout');
 $router->get('/list/infos/*/*/*', 'Xuplau\CRUD\Info\ListAll');
 
 $router->get('/info/*',  'Xuplau\CRUD\Info\Crud');
-$router->post('/info/*/',   'Xuplau\CRUD\Info\Crud');
-$router->put('/info/*/',    'Xuplau\CRUD\Info\Crud');
-$router->delete('/info/*/', 'Xuplau\CRUD\Info\Crud');
+$router->post('/info',   'Xuplau\CRUD\Info\Crud');
+$router->put('/info',    'Xuplau\CRUD\Info\Crud');
+$router->delete('/info', 'Xuplau\CRUD\Info\Crud');
 
 $router->any('/*', function () { return 'CRUD Demo!'; });
 
@@ -37,14 +38,15 @@ $loginCheck = function() use ($router) {
     }
 
     // get token
-    /*$token = base64_decode($token);
+    $headers = getallheaders();
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
 
     $userCheck = new UserCheck;
     $login     = $userCheck->isValid( $token );
 
     if ( $login === false ) {
         return Response::Unauthorized();
-    }*/
+    }
 
     if ( empty($token) && !in_array($router->request->uri, array( '/user/login', '/user/logout' )) ) {
 

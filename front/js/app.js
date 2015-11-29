@@ -82,8 +82,9 @@ APP.prototype = {
     retreive: function(hash, callback) {
         $.ajax({
             type: 'GET',
-            url: this.endpoint + 'info/' + this.token + '/' +hash,
+            url: this.endpoint + 'info/' + hash,
             dataType: 'json',
+            headers: { 'Authorization' : 'Bearer ' +this.token},
             error: function(xhr, status, error) {
                 callback(false);
             },
@@ -96,8 +97,9 @@ APP.prototype = {
     create: function(data, callback) {
         $.ajax({
             type: 'POST',
-            url: this.endpoint + 'info/' + this.token,
+            url: this.endpoint + 'info',
             dataType: 'json',
+            headers: { 'Authorization' : 'Bearer ' +this.token},
             data:data,
             error: function(xhr, status, error) {
                 callback(false);
@@ -111,8 +113,9 @@ APP.prototype = {
     update: function(data, callback) {
         $.ajax({
             type: 'PUT',
-             url: this.endpoint + 'info/' + this.token,
+             url: this.endpoint + 'info',
             dataType: 'json',
+            headers: { 'Authorization' : 'Bearer ' +this.token},
             data:data,
             error: function(xhr, status, error) {
                 callback(false);
@@ -126,8 +129,9 @@ APP.prototype = {
     delete: function(data, callback) {
         $.ajax({
             type: 'DELETE',
-            url: this.endpoint + 'info/' + this.token,
+            url: this.endpoint + 'info',
             dataType: 'json',
+            headers: { 'Authorization' : 'Bearer ' +this.token},
             data:data,
             error: function(xhr, status, error) {
                 callback(false);
