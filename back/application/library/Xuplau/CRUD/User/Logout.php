@@ -10,9 +10,6 @@ Class Logout extends MapperDB implements Routable
 {
 
     public function get() {
-
-        unset($_SESSION[APP_SESSION]);
-
         return Response::OK();
     }
 }

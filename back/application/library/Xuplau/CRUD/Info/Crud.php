@@ -15,10 +15,12 @@ use stdClass;
 Class Crud extends MapperDB implements Routable
 {
 
-    public function get( $hash ) {
+    public function get( $token, $hash ) {
+
+        $token = base64_decode($token);
 
         $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
+        $login     = $userCheck->isValid( $token );
 
         if ( $login === false ) {
             return Response::Unauthorized();
@@ -55,10 +57,12 @@ Class Crud extends MapperDB implements Routable
 
     }
 
-    public function post() {
+    public function post( $token ) {
+
+        $token = base64_decode($token);
 
         $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
+        $login     = $userCheck->isValid( $token );
 
         if ( $login === false ) {
             return Response::Unauthorized();
@@ -99,10 +103,12 @@ Class Crud extends MapperDB implements Routable
 
     }
 
-    public function put() {
+    public function put( $token ) {
+
+        $token = base64_decode($token);
 
         $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
+        $login     = $userCheck->isValid( $token );
 
         if ( $login === false ) {
             return Response::Unauthorized();
@@ -155,10 +161,12 @@ Class Crud extends MapperDB implements Routable
 
     }
 
-    public function delete() {
+    public function delete( $token ) {
+
+        $token = base64_decode($token);
 
         $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
+        $login     = $userCheck->isValid( $token );
 
         if ( $login === false ) {
             return Response::Unauthorized();
