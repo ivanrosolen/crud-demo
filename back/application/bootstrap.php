@@ -9,8 +9,12 @@ if (!$config = parse_ini_file(SETTINGS_INI, true)) {
 }
 
 header('Access-Control-Allow-Origin: ' . $config['config']['host']);
-header('Access-Control-Allow-Methods: POST, GET, PUT, REMOVE');
+header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE');
 header('Content-Type: application/json; charset=utf-8');
+
+if( $_SERVER['REQUEST_METHOD'] == 'OPTIONS' ) {
+    return true;
+}
 
 require_once realpath(__DIR__ . '/../vendor/autoload.php');
 
