@@ -3,6 +3,3 @@ db_server = "localhost"
 db_name   = "db"
 db_user   = "user"
 db_pwd    = "pwd"
-
-[config]
-host      = "http://crud.dev"

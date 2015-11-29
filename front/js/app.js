@@ -8,16 +8,16 @@ APP.prototype = {
 
     init: function () {
 
-        this.endpoint = 'http://api.crud.dev/';
+        this.endpoint = 'http://crud.dev/back/';
 
         if ( window.localStorage.getItem('user_hash') != undefined &&
              window.localStorage.getItem('user_hash') != '' &&
              window.localStorage.getItem('user_hash') != null )
         {
-            this.user_hash = window.localStorage.getItem('user_hash');
-            this.user_name = window.localStorage.getItem('user_name');
-            this.token     = window.localStorage.getItem('token');
+            this.user_hash    = window.localStorage.getItem('user_hash');
+            this.user_name    = window.localStorage.getItem('user_name');
         }
+
         return this;
     },
 
@@ -46,15 +46,15 @@ APP.prototype = {
             type: 'POST',
             url: this.endpoint + 'user/login',
             dataType: 'json',
+            cache: false,
             data:data,
             error: function(xhr, status, error) {
                 callback(false);
             },
             success: function (result) {
                 if ( result && result.hash != undefined && result.hash.length == 64) {
-                    window.localStorage.setItem('user_hash', result.hash);
-                    window.localStorage.setItem('user_name', result.name);
-                    window.localStorage.setItem('token',     result.token);
+                    window.localStorage.setItem('user_hash',    result.hash);
+                    window.localStorage.setItem('user_name',    result.name);
                     callback('ok');
                 } else {
                     callback(false);
@@ -67,9 +67,9 @@ APP.prototype = {
         if ( search == '' ) search = 'all';
         $.ajax({
             type: 'GET',
-            url: this.endpoint + 'list/infos/' + pag + '/' + search,
+            url: this.endpoint + 'list/infos/'+pag+'/'+search,
             dataType: 'json',
-            headers: { 'Authorization' : 'Bearer ' +this.token},
+            cache: false,
             error: function(xhr, status, error) {
                 callback(false);
             },
@@ -82,9 +82,9 @@ APP.prototype = {
     retreive: function(hash, callback) {
         $.ajax({
             type: 'GET',
-            url: this.endpoint + 'info/' + hash,
+            url: this.endpoint + 'info/'+hash,
             dataType: 'json',
-            headers: { 'Authorization' : 'Bearer ' +this.token},
+            cache: false,
             error: function(xhr, status, error) {
                 callback(false);
             },
@@ -99,8 +99,8 @@ APP.prototype = {
             type: 'POST',
             url: this.endpoint + 'info',
             dataType: 'json',
-            headers: { 'Authorization' : 'Bearer ' +this.token},
             data:data,
+            cache: false,
             error: function(xhr, status, error) {
                 callback(false);
             },
@@ -113,10 +113,10 @@ APP.prototype = {
     update: function(data, callback) {
         $.ajax({
             type: 'PUT',
-             url: this.endpoint + 'info',
+            url: this.endpoint + 'info',
             dataType: 'json',
-            headers: { 'Authorization' : 'Bearer ' +this.token},
             data:data,
+            cache: false,
             error: function(xhr, status, error) {
                 callback(false);
             },
@@ -131,8 +131,8 @@ APP.prototype = {
             type: 'DELETE',
             url: this.endpoint + 'info',
             dataType: 'json',
-            headers: { 'Authorization' : 'Bearer ' +this.token},
             data:data,
+            cache: false,
             error: function(xhr, status, error) {
                 callback(false);
             },

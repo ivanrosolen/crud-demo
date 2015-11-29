@@ -15,6 +15,13 @@ Class ListAll extends MapperDB implements Routable
 
     public function get( $pagina = 0, $search = 'all' ) {
 
+        $userCheck = new UserCheck;
+        $login     = $userCheck->isValid();
+
+        if ( $login === false ) {
+            return Response::Unauthorized();
+        }
+
         $pagination = 2;
 
         $where  = array();

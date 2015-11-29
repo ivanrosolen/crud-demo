@@ -3,23 +3,18 @@ Namespace Xuplau\CRUD\User;
 
 use Xuplau\Database\MapperDB;
 use Xuplau\CRUD\Validation as v;
-use Lcobucci\JWT\Parser;
 use Exception;
 use stdClass;
 
 Class Check extends MapperDB
 {
 
-    public function isValid( $token ) {
+    public function isValid() {
 
         try {
 
-            $parser = new Parser;
-            $token  = $parser->parse($token);
-            $hash   = $token->getClaim('uid');
-
             $login = $this->getMapper()
-                          ->user(array('hash'=>$hash,'status'=>1))
+                          ->user(array('hash'=>$_SESSION[APP_SESSION]->hash,'status'=>1))
                           ->fetch();
             if ( !$login ) {
                 return false;
