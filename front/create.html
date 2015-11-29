@@ -103,6 +103,7 @@
                 var data        = {};
                 data.field_text = $('#field_text').val(),
                 data.field_date = $('#field_date').val();
+                data.hash       = app.user_hash;
                 e.preventDefault();
                 $('#btnSend')
                 .text('Enviando ...');

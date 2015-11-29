@@ -1,4 +1,9 @@
-# CRUD DEMO
+# CRUD DEMO JWT
+
+# Dependencies
+
+- PHP 5.5+
+- OpenSSL Extension
 
 # links
 - palestra

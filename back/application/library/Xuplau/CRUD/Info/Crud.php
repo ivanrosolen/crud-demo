@@ -17,13 +17,6 @@ Class Crud extends MapperDB implements Routable
 
     public function get( $hash ) {
 
-        $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
-
-        if ( $login === false ) {
-            return Response::Unauthorized();
-        }
-
         $hash = filter_var( $hash, FILTER_SANITIZE_STRING );
 
         if ( empty($hash) || !v::InfoHash()->validate($hash) ) {
@@ -57,15 +50,9 @@ Class Crud extends MapperDB implements Routable
 
     public function post() {
 
-        $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
-
-        if ( $login === false ) {
-            return Response::Unauthorized();
-        }
-
         $text = filter_var( $_POST['field_text'], FILTER_SANITIZE_STRING );
         $date = filter_var( $_POST['field_date'], FILTER_SANITIZE_STRING );
+        $hash = filter_var( $_POST['hash'],       FILTER_SANITIZE_STRING );
 
         if ( empty($text) || !v::InfoText()->validate($text) ) {
             return Response::Bad_Request('Parâmetro Texto inválido');
@@ -76,7 +63,18 @@ Class Crud extends MapperDB implements Routable
         }
         $date = DateTime::createFromFormat('d/m/Y', $date);
 
+        if ( empty($hash) || !v::InfoHash()->validate($hash) ) {
+            return Response::Bad_Request('Parâmetro inválido');
+        }
+
         try {
+
+            $login = $this->getMapper()
+                          ->user(array('hash'=>$hash,'status'=>1))
+                          ->fetch();
+            if ( !$login ) {
+                return Response::Unprocessable_Entity('Erro ao validar usuário');
+            }
 
             $info             = new StdClass;
             $info->hash       = hash('sha256',$text+time());
@@ -89,7 +87,7 @@ Class Crud extends MapperDB implements Routable
             $this->getMapper()->flush();
 
         } catch ( PDOException $e ) {
-            return Response::Internal_Server_Error('Falha no sistema2');
+            return Response::Internal_Server_Error('Falha no sistema');
         }  catch ( Exception $e ) {
             return Response::Internal_Server_Error('Falha no sistema1');
         }
@@ -100,13 +98,6 @@ Class Crud extends MapperDB implements Routable
     }
 
     public function put() {
-
-        $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
-
-        if ( $login === false ) {
-            return Response::Unauthorized();
-        }
 
         parse_str(file_get_contents('php://input'), $vars);
 
@@ -156,13 +147,6 @@ Class Crud extends MapperDB implements Routable
     }
 
     public function delete() {
-
-        $userCheck = new UserCheck;
-        $login     = $userCheck->isValid();
-
-        if ( $login === false ) {
-            return Response::Unauthorized();
-        }
 
         parse_str(file_get_contents('php://input'), $vars);
 
