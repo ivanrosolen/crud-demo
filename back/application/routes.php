@@ -39,26 +39,24 @@ $loginCheck = function() use ($router) {
         return false;
     }
 
-    // get token
-    $headers = getallheaders();
-    $token = str_replace('Bearer ', '', $headers['Authorization']);
-
-    $userCheck = new UserCheck;
-    $login     = $userCheck->isValid( $token );
-
-    error_log((string) $token);
-
-    if ( empty($token) ) {
-        echo Response::Unauthorized();
-        return false;
-    }
-
-    if ( $login === false ) {
-        echo Response::Unauthorized();
-        return false;
-    }
-
     if ( !in_array($router->request->uri, array( '/user/login', '/user/logout' )) ) {
+
+        // get token
+        $headers = getallheaders();
+        $token = str_replace('Bearer ', '', $headers['Authorization']);
+
+        $userCheck = new UserCheck;
+        $login     = $userCheck->isValid( $token );
+
+        if ( empty($token) ) {
+            echo Response::Unauthorized();
+            return false;
+        }
+
+        if ( $login === false ) {
+            echo Response::Unauthorized();
+            return false;
+        }
 
         $parser = new Parser;
         $token = $parser->parse($token);

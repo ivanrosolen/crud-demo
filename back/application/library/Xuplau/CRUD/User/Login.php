@@ -48,9 +48,9 @@ Class Login extends MapperDB implements Routable
             return Response::Internal_Server_Error('Falha no login');
         }
 
-        $signer = new Sha256;
-
+        $signer  = new Sha256;
         $builder = new Builder;
+
         $token   = $builder->setIssuer($config['jwt']['issuer'])
                            ->setAudience($config['jwt']['audience'])
                            ->setId(hash('sha256',$config['jwt']['key'].$login->hash), true)

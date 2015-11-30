@@ -6,3 +6,8 @@ db_pwd    = "pwd"
 
 [config]
 host      = "http://crud.dev"
+
+[jwt]
+issuer    = "http://api.crud.dev"
+audience  = "http://crud.dev"
+key       = "key"
