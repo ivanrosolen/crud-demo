@@ -40,11 +40,10 @@ Class ListAll extends MapperDB implements Routable
                 return Response::No_Content('Nenhum registro encontrado');
             }
 
-        } catch ( PDOException $e ) {
-
-            return Response::Internal_Server_Error(array('Falha no sistema'));
-        }  catch ( Exception $e ) {
-            return Response::Internal_Server_Error(array('Falha no sistema'));
+        } catch ( PDOException $e) {
+            return Response::Internal_Server_Error('Falha algo na PDO');
+        }  catch ( Exception $e) {
+            return Response::Internal_Server_Error('Falha algo no PHP');
         }
 
         $sql   = $sql->limit($pag,$pagination);

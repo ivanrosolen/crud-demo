@@ -38,10 +38,10 @@ Class Login extends MapperDB implements Routable
                 return Response::No_Content('Nenhum login encontrado');
             }
 
-        } catch ( PDOException $e ) {
-            return Response::Internal_Server_Error('Falha no login');
-        }  catch ( Exception $e ) {
-            return Response::Internal_Server_Error('Falha no login');
+        } catch ( PDOException $e) {
+            return Response::Internal_Server_Error('Falha algo na PDO');
+        }  catch ( Exception $e) {
+            return Response::Internal_Server_Error('Falha algo no PHP');
         }
 
         if (!$config = parse_ini_file(SETTINGS_INI, true)) {
@@ -65,8 +65,6 @@ Class Login extends MapperDB implements Routable
         $tmp->name    = $login->name;
         $tmp->hash    = $login->hash;
         $tmp->token   = (string) $token;
-
-        error_log((string) $token);
 
         return Response::OK( $tmp );
     }

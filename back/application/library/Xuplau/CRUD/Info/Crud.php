@@ -33,10 +33,10 @@ Class Crud extends MapperDB implements Routable
                 return Response::No_Content('Nenhum registro encontrado');
             }
 
-        } catch ( PDOException $e ) {
-            return Response::Internal_Server_Error('Falha no sistema');
-        }  catch ( Exception $e ) {
-            return Response::Internal_Server_Error('Falha no sistema');
+        } catch ( PDOException $e) {
+            return Response::Internal_Server_Error('Falha algo na PDO');
+        }  catch ( Exception $e) {
+            return Response::Internal_Server_Error('Falha algo no PHP');
         }
 
         $info->user       = $info->user_id->name;
@@ -86,14 +86,13 @@ Class Crud extends MapperDB implements Routable
             $this->getMapper()->info->persist($info);
             $this->getMapper()->flush();
 
-        } catch ( PDOException $e ) {
-            return Response::Internal_Server_Error('Falha no sistema');
-        }  catch ( Exception $e ) {
-            return Response::Internal_Server_Error('Falha no sistema1');
+        } catch ( PDOException $e) {
+            return Response::Internal_Server_Error('Falha algo na PDO');
+        }  catch ( Exception $e) {
+            return Response::Internal_Server_Error('Falha algo no PHP');
         }
 
         return Response::OK(array('newHash' => $info->hash));
-
 
     }
 
@@ -136,10 +135,10 @@ Class Crud extends MapperDB implements Routable
             $this->getMapper()->info->persist($info);
             $this->getMapper()->flush();
 
-        } catch ( PDOException $e ) {
-            return Response::Internal_Server_Error('Falha no sistema');
-        }  catch ( Exception $e ) {
-            return Response::Internal_Server_Error('Falha no sistema');
+        } catch ( PDOException $e) {
+            return Response::Internal_Server_Error('Falha algo na PDO');
+        }  catch ( Exception $e) {
+            return Response::Internal_Server_Error('Falha algo no PHP');
         }
 
         return Response::OK(array('newHash' => $info->hash));
@@ -170,9 +169,9 @@ Class Crud extends MapperDB implements Routable
             $this->getMapper()->flush();
 
         } catch ( PDOException $e) {
-            return Response::Internal_Server_Error('Falha no sistema');
+            return Response::Internal_Server_Error('Falha algo na PDO');
         }  catch ( Exception $e) {
-            return Response::Internal_Server_Error('Falha no sistema');
+            return Response::Internal_Server_Error('Falha algo no PHP');
         }
 
         return Response::OK('Registro Removido');

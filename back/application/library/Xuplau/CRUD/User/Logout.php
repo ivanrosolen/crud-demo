@@ -8,7 +8,6 @@ use Respect\Rest\Routable;
 
 Class Logout extends MapperDB implements Routable
 {
-
     public function get() {
         return Response::OK();
     }

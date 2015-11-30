@@ -8,6 +8,8 @@ use Lcobucci\JWT\ValidationData;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 
+
+// host path http://host/path/to/public/
 $base = '';
 
 $router = new Router($base);
@@ -64,7 +66,9 @@ $loginCheck = function() use ($router) {
         $data = new ValidationData;
         $data->setIssuer($config['jwt']['issuer']);
         $data->setAudience($config['jwt']['audience']);
-        $data->setId(hash('sha256',$config['jwt']['key'].$login->hash), true);
+
+        // unique id - blacklist
+        $data->setId( hash('sha256', $config['jwt']['key'].$login->hash), true) ;
 
         $signer = new Sha256;
 
