@@ -53,7 +53,7 @@ Class Login extends MapperDB implements Routable
         $builder = new Builder;
         $token   = $builder->setIssuer($config['jwt']['issuer'])
                            ->setAudience($config['jwt']['audience'])
-                           ->setId($config['jwt']['id'], true)
+                           ->setId(hash('sha256',$config['jwt']['id'].time()), true)
                            ->setIssuedAt(time())
                            ->setNotBefore(time() - 1)
                            ->setExpiration(time() + 3600)

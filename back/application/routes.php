@@ -61,8 +61,9 @@ $loginCheck = function() use ($router) {
 
         $signer = new Sha256;
 
-        if ( (bool) $token->validate($data) !== true ||
-             (bool) $token->verify($signer, $config['jwt']['key']) !== true )
+        // validate() and verify() returns BOOL
+        if ( $token->validate($data) !== true ||
+             $token->verify($signer, $config['jwt']['key']) !== true )
         {
             echo Response::Unauthorized();
             return false;
