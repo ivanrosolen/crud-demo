@@ -62,6 +62,8 @@ Class Login extends MapperDB implements Routable
         $tmp->hash    = $login->hash;
         $tmp->token   = (string) $token;
 
+        error_log((string) $token);
+
         return Response::OK( $tmp );
     }
 }
