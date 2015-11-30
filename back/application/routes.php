@@ -35,7 +35,8 @@ $jsonRender = function ($data) {
 $loginCheck = function() use ($router) {
 
     if (!$config = parse_ini_file(SETTINGS_INI, true)) {
-        return Response::Internal_Server_Error('Falha no login');
+        echo Response::Internal_Server_Error('Falha no login');
+        return false;
     }
 
     // get token
@@ -45,11 +46,19 @@ $loginCheck = function() use ($router) {
     $userCheck = new UserCheck;
     $login     = $userCheck->isValid( $token );
 
-    if ( $login === false ) {
-        return Response::Unauthorized();
+    error_log((string) $token);
+
+    if ( empty($token) ) {
+        echo Response::Unauthorized();
+        return false;
     }
 
-    if ( empty($token) && !in_array($router->request->uri, array( '/user/login', '/user/logout' )) ) {
+    if ( $login === false ) {
+        echo Response::Unauthorized();
+        return false;
+    }
+
+    if ( !in_array($router->request->uri, array( '/user/login', '/user/logout' )) ) {
 
         $parser = new Parser;
         $token = $parser->parse($token);
@@ -57,7 +66,7 @@ $loginCheck = function() use ($router) {
         $data = new ValidationData;
         $data->setIssuer($config['jwt']['issuer']);
         $data->setAudience($config['jwt']['audience']);
-        $data->setId($config['jwt']['id'], true);
+        $data->setId(hash('sha256',$config['jwt']['key'].$login->hash), true);
 
         $signer = new Sha256;
 
